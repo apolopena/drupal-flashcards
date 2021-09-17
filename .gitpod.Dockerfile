@@ -30,9 +30,8 @@ RUN wget http://xdebug.org/files/xdebug-3.0.4.tgz \
 COPY --chown=gitpod:gitpod .gp/bash/update-composer.sh /tmp
 RUN sudo bash -c ". /tmp/update-composer.sh" && rm /tmp/update-composer.sh
 
-# gitpod trick to bypass the docker caching mechanism for all lines below this one
-# just increment the value each time you want to bypass the cache system
-ENV INVALIDATE_CACHE=186
+# To force a docker image rebuild increment this value
+ENV INVALIDATE_CACHE=187
 
 COPY --chown=gitpod:gitpod .gp/conf/apache/apache2.conf /etc/apache2/apache2.conf
 COPY --chown=gitpod:gitpod .gp/conf/nginx/nginx.conf /etc/nginx/nginx.conf
