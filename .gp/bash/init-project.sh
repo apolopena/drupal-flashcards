@@ -6,19 +6,29 @@
 
 # Load logger
 . .gp/bash/workspace-init-logger.sh
+# Load spinner
+. .gp/bash/spinner.sh
 
-# BEGIN example code block - migrate database
-# . .gp/bash/spinner.sh # COMMENT: Load spinner
-# __migrate_msg="Migrating database"
-# log_silent "$__migrate_msg" && start_spinner "$__migrate_msg"
-# php artisan migrate
-# err_code=$?
-# if [ $err_code != 0 ]; then
-#  stop_spinner $err_code
-#  log -e "ERROR: Failed to migrate database"
-# else
-#  stop_spinner $err_code
-#  log "SUCCESS: migrated database"
-# fi
-# END example code block - migrate database
-
+# Create drupal user and database
+msg="Creating mysql database: drupalsite"
+log_silent "$msg" && start_spinner "$msg"
+mysql -e "CREATE DATABASE drupalsite CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+ec=$?
+if [ $ec -ne 0 ]; then
+  stop_spinner $ec
+  log -e "ERROR: $msg"
+else
+  log_silent "SUCCESS: $msg"
+  stop_spinner $ec
+fi
+msg="Creating mysql drupal user @localhost: drupalusr"
+log_silent "$msg" && start_spinner "$msg"
+mysql -e "CREATE USER drupalusr@localhost IDENTIFIED BY 'DefaultPa33word!@#$';"
+ec=$?
+if [ $ec -ne 0 ]; then
+  stop_spinner $ec
+  log -e "ERROR: $msg"
+else
+  log_silent "SUCCESS: $msg"
+  stop_spinner $ec
+fi
