@@ -1,12 +1,12 @@
 .starter.env
-/vendor/
+vendor/
+phpmyadmin/
 /node_modules/
-/public/phpmyadmin
+/drupal/web/vendor
 /node_modules
 /public/hot
 /public/storage
 /storage/*.key
-/vendor
 .env
 .env.backup
 .phpunit.result.cache
@@ -15,8 +15,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-# Laravel Mix artifacts
-/public/js
-/public/css
-/public/build
-/public/mix-manifest.json
