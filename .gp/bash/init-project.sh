@@ -47,7 +47,7 @@ else
 fi
 msg="Granting mysql privileges for user: drupalusr, on database: drupalsite"
 log_silent "$msg" && start_spinner "$msg"
-mysql -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES ON drupalsite.* TO 'drupalusr'@'localhost' IDENTIFIED BY 'DefaultPa33word!@#$';"
+mysql -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES ON drupalsite.* TO 'drupalusr'@'localhost';"
 ec=$?
 if [ $ec -ne 0 ]; then
   stop_spinner $ec
